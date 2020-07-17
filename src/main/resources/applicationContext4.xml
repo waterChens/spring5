@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+   <bean id="userService" class="com.waterchen.basic.proxy.UserServiceImpl"></bean>
+   <bean id="before" class="com.waterchen.basic.dynamic.Before"></bean>
+   <aop:config>
+      <!--所有的方法都作为切入点，加入额外的功能-->
+      <aop:pointcut id="pc" expression="execution(* *.*(..))"></aop:pointcut>
+      <aop:pointcut expression="execution(* com.waterchen.basic.proxy.*(..))" id="sleepPointcut"/>
+      <!--组装：把切入点与额外的功能进行整合-->
+      <aop:advisor advice-ref="before" pointcut-ref="pc" ></aop:advisor>
+   </aop:config>
+</beans>

@@ -3,6 +3,7 @@ package com.waterchen;
 import com.waterchen.basic.Person;
 import com.waterchen.basic.User;
 import com.waterchen.basic.UserService;
+import com.waterchen.basic.beanpost.Category;
 import com.waterchen.basic.constructer.Customer;
 import com.waterchen.basic.factorybean.ConnectionFactoryBean;
 import com.waterchen.basic.life.Product;
@@ -154,12 +155,34 @@ public class TestSpring {
         //Product account = (Product)ctx.getBean("product");
         ctx.close();
     }
-    //用于测试 生命周期
+    //用于测试 配置文件参数化
     @Test
     public void test14(){
         //创建过程
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext1.xml");
         Connection account = (Connection)ctx.getBean("conn");
+    }
+
+    //用于测试 自定义类型转换器
+    @Test
+    public void test15(){
+        //创建过程
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext2.xml");
+        com.waterchen.basic.converter.Person person = (com.waterchen.basic.converter.Person)ctx.getBean("person");
+        System.out.println(person.getBirthday());
+
+    }
+
+
+    //用于测试 beanpostProcesser
+    @Test
+    public void test16(){
+        //创建过程
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext3.xml");
+        Category category = (Category)ctx.getBean("category");
+        System.out.println(category.getName());
+
+
     }
 
 }
