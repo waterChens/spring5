@@ -1,5 +1,6 @@
 /spring5source.iml
 /.idea/.gitignore
+/target/*
 /target/classes/com/waterchen/basic/scope/Account.class
 /target/classes/applicationContext.xml
 /target/classes/applicationContext1.xml
