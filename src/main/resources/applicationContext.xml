@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- id属性 名字（唯一） class属性配置全限定名-->
+<!--<bean id="person" class="com.waterchen.basic.Person"></bean>
+<bean id="person1" class="com.waterchen.basic.Person"></bean>-->
+
+    <bean id="person" class="com.waterchen.basic.Person">
+        <!--<property name="name">
+            <value>nihao</value>
+        </property> 与下面是同样的效果，但是只能替换jdk提供的基本类型和string-->
+        <property name="name" value="nihao"></property>
+        <property name="age" value="166"></property>
+        <property name="emails">
+            <list>
+                <value>79jj@qq.com</value>
+                <value>yyjj@qq.com</value>
+                <value>ooojj@qq.com</value>
+            </list>
+        </property>
+        <property name="tels">
+            <set>
+                <value>23434</value>
+                <value>239089</value>
+                <value>200000</value>
+                <value>200000</value>
+                <value>200000</value>
+            </set>
+        </property>
+        <property name="addresses">
+            <list>
+                <value>zpartk</value>
+                <value>shangd</value>
+                <value>shangd</value>
+                <value>shangd</value>
+                <value>xierqi</value>
+                <value>xierqi</value>
+            </list>
+        </property>
+        <property name="qq">
+            <map>
+                <entry>
+                    <key><value>nihao</value></key>
+                    <value>fuzhigeini</value>
+                </entry>
+            </map>
+        </property>
+        <property name="p">
+            <props>
+                <prop key="ni1">hao1</prop>
+                <prop key="ni3">hao3</prop>
+                <prop key="ni2">hao2</prop>
+            </props>
+        </property>
+    </bean><!--
+    <bean id="userService" class="com.waterchen.basic.UserServiceImpl">
+        <property name="userDao">
+            <bean id="userDao" class="com.waterchen.basic.UserDaoImpl"></bean>
+        </property>
+    </bean>-->
+   <!-- <bean id="userService" class="com.waterchen.basic.UserServiceImpl">
+        <property name="userDao">
+            <ref bean="userDao"></ref>
+        </property>
+    </bean> 与下面的方式是一样的-->
+    <bean id="userService" class="com.waterchen.basic.UserServiceImpl">
+        <property name="userDao" ref="userDao">
+        </property>
+    </bean>
+    <bean id="userDao" class="com.waterchen.basic.UserDaoImpl"></bean>
+    <!--<bean id="person444" class="com.waterchen.basic.Person" p:name="xiaming" p:age="3"></bean>-->
+
+  <!--  <bean id="customer" class="com.waterchen.basic.constructer.Customer">
+        <constructor-arg>
+            <value>sunsxiaohei</value>
+        </constructor-arg>&lt;!&ndash;
+        <constructor-arg>
+            <value>102</value>
+        </constructor-arg>&ndash;&gt;
+    </bean>-->
+    <bean id="customer" class="com.waterchen.basic.constructer.Customer">
+     <!--   <constructor-arg>
+            <value>sunsxiaohei</value>
+        </constructor-arg>-->
+        <constructor-arg type="int">
+            <value>14402</value>
+        </constructor-arg>
+    </bean>
+    <bean id="conn" class="com.waterchen.basic.factorybean.ConnectionFactoryBean">
+        <property name="driverName" value="com.mysql.jdbc.Driver"></property>
+        <property name="passwd" value="123456"></property>
+        <property name="url" value="jdbc:mysql://192.168.88.128:3306/test?useSSL=false" ></property>
+        <property name="userName" value="root"></property>
+    </bean>
+
+    <!--整合代码-->
+    <bean id="connFactory" class="com.waterchen.basic.factorybean.ConnectionFactory"></bean>
+    <bean id="connF" factory-bean="connFactory" factory-method="getConnection"></bean>
+
+    <bean id="connStatic" class="com.waterchen.basic.factorybean.StaticConnectionFactory" factory-method="getConnection"></bean>
+
+    <bean id="account" class="com.waterchen.basic.scope.Account" scope="singleton"></bean>
+
+    <bean id="product" lazy-init="false" scope="singleton" class="com.waterchen.basic.life.Product" init-method="myInit" destroy-method="myDestroy">
+        <property name="name" value="nihaoxi"></property>
+    </bean>
+    <bean id="product2" lazy-init="false" scope="singleton" class="com.waterchen.basic.life.Product2" init-method="myInit"></bean>
+</beans>
