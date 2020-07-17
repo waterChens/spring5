@@ -8,10 +8,10 @@
     <context:property-placeholder location="classpath:/db.properties" />
 
     <bean id="conn" class="com.waterchen.basic.factorybean.ConnectionFactoryBean">
-        <property name="driverName" value="${driverName}"></property>
-        <property name="passwd" value="${passwd}"></property>
-        <property name="url" value="${url}" ></property>
-        <property name="userName" value="${userName}"></property>
+        <property name="driverName" value="${jdbc.driverName}"></property>
+        <property name="passwd" value="${jdbc.passwd}"></property>
+        <property name="url" value="${jdbc.url}" ></property>
+        <property name="userName" value="${jdbc.userName}"></property>
     </bean>
 
 </beans>
